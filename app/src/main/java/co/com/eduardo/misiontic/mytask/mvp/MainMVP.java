@@ -1,8 +1,10 @@
 package co.com.eduardo.misiontic.mytask.mvp;
 
+import android.content.Context;
+
 import java.util.List;
 
-import co.com.eduardo.misiontic.mytask.view.dto.TaskItem;
+import co.com.eduardo.misiontic.mytask.model.database.entities.TaskItem;
 
 public interface MainMVP {
     interface  Model {
@@ -39,5 +41,7 @@ public interface MainMVP {
         void showDeleteDialog(String message, TaskItem task);
 
         void deleteTask(TaskItem task);
+
+        Context getActivity();
     }
 }

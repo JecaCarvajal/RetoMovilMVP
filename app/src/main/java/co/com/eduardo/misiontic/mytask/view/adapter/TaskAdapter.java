@@ -15,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import co.com.eduardo.misiontic.mytask.R;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskItem;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskState;
+import co.com.eduardo.misiontic.mytask.model.database.entities.TaskItem;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     private List<TaskItem> data;
@@ -71,7 +70,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         holder.tvDescription.setText(item.getDescription());
         holder.tvDate.setText(item.getDate());
-        int color = item.getState() == TaskState.PENDING
+        int color = item.getState() == "PENDING"
                 ? R.color.task_pending
                 : R.color.task_done;
         holder.ivIcon.setColorFilter(ContextCompat.getColor(holder.itemView.getContext(), color),

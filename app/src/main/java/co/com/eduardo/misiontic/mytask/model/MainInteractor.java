@@ -1,37 +1,40 @@
 package co.com.eduardo.misiontic.mytask.model;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import co.com.eduardo.misiontic.mytask.model.database.entities.TaskItem;
+import co.com.eduardo.misiontic.mytask.model.repository.TaskRepository;
 import co.com.eduardo.misiontic.mytask.mvp.MainMVP;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskItem;
 
 public class MainInteractor implements MainMVP.Model {
 
-    private List<TaskItem> tempItems;
+    private TaskRepository taskRepository;
 
-    public MainInteractor() {
-        tempItems = new ArrayList<>();
-        tempItems.add(new TaskItem("Hacer el trabajo", "2021-12-10"));
+    public MainInteractor(Context context) {
+         taskRepository = new TaskRepository(context);
     }
+
 
     @Override
     public List<TaskItem> getTasks() {
-        return new ArrayList<>(tempItems);
+        return taskRepository.getAllTask();
     }
 
     @Override
     public void saveTask(TaskItem task) {
-        tempItems.add(task);
+         taskRepository.AddTaskItem(task);
     }
 
     @Override
     public void updateTask(TaskItem item) {
-
+        taskRepository.UpdatedTasItem(item);
     }
 
     @Override
     public void deleteTask(TaskItem task) {
-
+        taskRepository.DeleteTaskItem(task);
     }
 }

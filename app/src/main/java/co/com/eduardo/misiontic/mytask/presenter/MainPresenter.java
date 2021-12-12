@@ -5,9 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import co.com.eduardo.misiontic.mytask.model.MainInteractor;
+import co.com.eduardo.misiontic.mytask.model.database.entities.TaskItem;
 import co.com.eduardo.misiontic.mytask.mvp.MainMVP;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskItem;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskState;
 
 public class MainPresenter implements MainMVP.Presenter {
 
@@ -16,7 +15,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
     public MainPresenter(MainMVP.View view) {
        this.view = view;
-       this.model = new MainInteractor();
+       this.model = new MainInteractor(view.getActivity());
     }
     @Override
     public void addNewTask() {
@@ -37,7 +36,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void taskItemClicked(TaskItem task) {
-        String message = task.getState() == TaskState.PENDING
+        String message = task.getState() == "PENDING"
                 ? "Desea marcar como terminada esta tarea?"
                 : "Desea marcar como pendiente esta tarea?";
         view.showConfirmDialog(message, task);
@@ -45,7 +44,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void updateTask(TaskItem task) {
-        task.setState(task.getState() == TaskState.PENDING ? TaskState.DONE : TaskState.PENDING);
+        task.setState(task.getState() == "PENDING" ? "DONE" : "PENDING");
 
         model.updateTask(task);
         view.updateTask(task);
@@ -53,7 +52,7 @@ public class MainPresenter implements MainMVP.Presenter {
 
     @Override
     public void taskItemLongClicked(TaskItem task) {
-        if(task.getState() == TaskState.DONE) {
+        if(task.getState() == "PENDING") {
             view.showDeleteDialog("Desea Eliminar la tarea", task);
         }
     }
