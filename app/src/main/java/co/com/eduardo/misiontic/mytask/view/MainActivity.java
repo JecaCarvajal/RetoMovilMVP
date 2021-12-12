@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -16,10 +16,10 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.util.List;
 
 import co.com.eduardo.misiontic.mytask.R;
+import co.com.eduardo.misiontic.mytask.model.database.entities.TaskItem;
 import co.com.eduardo.misiontic.mytask.mvp.MainMVP;
 import co.com.eduardo.misiontic.mytask.presenter.MainPresenter;
 import co.com.eduardo.misiontic.mytask.view.adapter.TaskAdapter;
-import co.com.eduardo.misiontic.mytask.view.dto.TaskItem;
 
 public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
@@ -84,7 +84,10 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
 
     @Override
     public void addTaskToList(TaskItem task) {
-        taskAdapter.addItem(task);
+        String test = etNewTask.getText().toString();
+        if (!test.equals("")) {
+            taskAdapter.addItem(task);
+        }
     }
 
     @Override
@@ -129,5 +132,10 @@ public class MainActivity extends AppCompatActivity implements MainMVP.View {
     @Override
     public void deleteTask(TaskItem task) {
         taskAdapter.removeTask(task);
+    }
+
+    @Override
+    public Context getActivity() {
+        return this;
     }
 }

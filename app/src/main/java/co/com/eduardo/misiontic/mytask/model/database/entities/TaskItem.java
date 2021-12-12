@@ -3,8 +3,6 @@ package co.com.eduardo.misiontic.mytask.model.database.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import co.com.eduardo.misiontic.mytask.view.dto.TaskState;
-
 @Entity
 public class TaskItem {
 
@@ -12,31 +10,48 @@ public class TaskItem {
     private int id;
     private String description;
     private String date;
-    private TaskState state;
+    private String state;
+
+    public TaskItem() {
+    }
 
     public TaskItem(String description, String date) {
         this.description = description;
         this.date = date;
-        this.state = TaskState.PENDING;
+        this.state = "PENDING";
     }
 
     public int getId() {
         return id;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getDate() {
         return date;
     }
 
-    public TaskState getState() {
+    public void setDate(String date )
+    {
+        this.date = date;
+    }
+
+    public String getState() {
         return state;
     }
 
-    public void setState(TaskState state) {
+    public void setState(String state )
+    {
         this.state = state;
     }
 }
